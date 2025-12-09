@@ -17,6 +17,7 @@
                             <th>Vorname</th>
                             <th>Nachname</th>
                             <th>Geburtsdatum</th>
+                            <th>Gruppe</th>
                             <th>&nbsp;</th>
                         </tr>
                     </thead>
@@ -25,6 +26,7 @@
                             <td th:text="${u.firstname}"></td>
                             <td th:text="${u.lastname}"></td>
                             <td th:text="${u.birthDate}"></td>
+                            <td th:text="${u.group}"></td>
                             <td>
                                 <!-- /delete?id=123, delete/123 -->
                                 <a th:href="@{'/delete?id=' + ${u.id}}" class="btn btn-danger">Löschen</a>

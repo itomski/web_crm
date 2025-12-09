@@ -43,6 +43,7 @@ public class MainController {
     @GetMapping("/edit")
     public String editForm(@RequestParam int id, Model ui) {
         ui.addAttribute("title", "User bearbeiten");
+        ui.addAttribute("groups", groupRepo.findAll());
         Optional<User> opt = repo.findById(id);
         if(opt.isPresent()) {
             ui.addAttribute("user", opt.get());
@@ -61,10 +62,11 @@ public class MainController {
     }
 
     @PostMapping("/save")
-    public String save(int id, String firstname, String lastname, LocalDate birthdate,  Model ui) {
+    public String save(int id, String firstname, String lastname, LocalDate birthdate, int groupId,  Model ui) {
         // TODO: Daten validieren
         User user = new User(firstname, lastname, birthdate);
         user.setId(id);
+        user.setGroup(groupRepo.findById(groupId).get());
         repo.save(user);
         return "redirect:/list"; // Umleitung auf die Liste
     }

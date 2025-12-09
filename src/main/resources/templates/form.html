@@ -26,9 +26,9 @@
                         <input type="date" name="birthdate" id="birthdate" class="form-control" th:value="${user.birthDate}">
                     </div>
                     <div class="mb-3">
-                        <label for="group" class="form-label">Gruppe</label>
-                        <select name="" id="">
-                            <option th:each="g : ${groups}" value="" th:text="${g.name}"></option>
+                        <label for="groupId" class="form-label">Gruppe</label>
+                        <select name="groupId" id="groupId" class="form-select">
+                            <option th:each="g : ${groups}" th:value="${g.id}" th:text="${g.name}"></option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-info">Speichern</button>
