@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.8/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <nav>
+                    <ul class="nav nav-underline">
+                        <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/form">New</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/list">List</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <h1 th:text="${title}"></h1>
+
+                <form action="/save" method="post">
+
+                    <input type="hidden" name="id" th:value="${user.id}">
+
+                    <div class="mb-3">
+                        <label for="firstname" class="form-label">Vorname</label>
+                        <input type="text" name="firstname" id="firstname" class="form-control" th:value="${user.firstname}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastname" class="form-label">Nachname</label>
+                        <input type="text" name="lastname" id="lastname" class="form-control" th:value="${user.lastname}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="birthdate" class="form-label">Geburtsdatum</label>
+                        <input type="date" name="birthdate" id="birthdate" class="form-control" th:value="${user.birthDate}">
+                    </div>
+                    <button type="submit" class="btn btn-info">Speichern</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
