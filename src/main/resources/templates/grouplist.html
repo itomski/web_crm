@@ -9,26 +9,21 @@
             <div class="col">
                 <h1 th:text="${title}"></h1>
 
-                <a href="/form" class="btn btn-info">Neu</a>
+                <a href="/groups/form" class="btn btn-info">Neu</a>
 
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Vorname</th>
-                            <th>Nachname</th>
-                            <th>Geburtsdatum</th>
+                            <th>Name</th>
                             <th>&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="u : ${user}">
-                            <td th:text="${u.firstname}"></td>
-                            <td th:text="${u.lastname}"></td>
-                            <td th:text="${u.birthDate}"></td>
+                        <tr th:each="g : ${groups}">
+                            <td th:text="${g.name}"></td>
                             <td>
-                                <!-- /delete?id=123, delete/123 -->
-                                <a th:href="@{'/delete?id=' + ${u.id}}" class="btn btn-danger">Löschen</a>
-                                <a th:href="@{'/edit?id=' + ${u.id}}" class="btn btn-info">Bearbeiten</a>
+                                <a th:href="@{'/groups/delete?id=' + ${g.id}}" class="btn btn-danger">Löschen</a>
+                                <a th:href="@{'/groups/edit?id=' + ${g.id}}" class="btn btn-info">Bearbeiten</a>
                             </td>
                         </tr>
                     </tbody>

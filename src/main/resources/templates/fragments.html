@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:fragment="header">
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="/webjars/bootstrap/5.3.8/css/bootstrap.min.css">
+</head>
+<body>
+
+  <div class="row" th:fragment="mainNav">
+    <div class="col">
+      <nav>
+        <ul class="nav nav-underline">
+          <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/list">User</a></li>
+          <li class="nav-item"><a class="nav-link" href="/groups/list">Groups</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+</body>
+</html>

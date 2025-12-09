@@ -20,6 +20,9 @@ public class MainController {
     @Autowired // Der Server erzeugt automatisch ein Objekt und weist es zu
     private UserRepository repo;
 
+    @Autowired
+    private UserGroupRepository groupRepo;
+
     // http://localhost:8080/
     @GetMapping("/")
     public String start(Model ui) {
@@ -33,6 +36,7 @@ public class MainController {
     public String newForm(Model ui) {
         ui.addAttribute("title", "Neuer User");
         ui.addAttribute("user", new User());
+        ui.addAttribute("groups", groupRepo.findAll());
         return "form";
     }
 

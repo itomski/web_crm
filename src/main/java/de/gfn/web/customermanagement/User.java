@@ -21,6 +21,9 @@ public class User {
 
     private LocalDate birthDate;
 
+    @ManyToOne
+    private UserGroup group;
+
     public User() {
     }
 
@@ -60,5 +63,13 @@ public class User {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public UserGroup getGroup() {
+        return group;
+    }
+
+    public void setGroup(UserGroup group) {
+        this.group = group;
     }
 }

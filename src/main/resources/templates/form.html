@@ -1,23 +1,9 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="/webjars/bootstrap/5.3.8/css/bootstrap.min.css">
-</head>
+<head th:replace="~{fragments.html :: header}"></head>
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col">
-                <nav>
-                    <ul class="nav nav-underline">
-                        <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/form">New</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/list">List</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
+        <div th:replace="~{fragments.html :: mainNav}"></div>
 
         <div class="row">
             <div class="col">
@@ -38,6 +24,12 @@
                     <div class="mb-3">
                         <label for="birthdate" class="form-label">Geburtsdatum</label>
                         <input type="date" name="birthdate" id="birthdate" class="form-control" th:value="${user.birthDate}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="group" class="form-label">Gruppe</label>
+                        <select name="" id="">
+                            <option th:each="g : ${groups}" value="" th:text="${g.name}"></option>
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-info">Speichern</button>
                 </form>
