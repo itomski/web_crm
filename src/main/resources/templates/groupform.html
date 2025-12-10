@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="de">
-<head th:replace="~{fragments.html :: header}"></head>
+<head th:replace="~{fragments.html :: header(${title})}"></head>
 <body>
     <div class="container">
-        <div th:replace="~{fragments.html :: mainNav}"></div>
+        <div th:replace="~{fragments.html :: mainNav('group')}"></div>
 
         <div class="row">
             <div class="col">
                 <h1 th:text="${title}"></h1>
 
-                <form action="/groups/save" method="post">
+                <form action="/groups/save" method="post" th:object="${group}">
 
-                    <input type="hidden" name="id" th:value="${group.id}">
+                    <input type="hidden" th:field="*{id}">
 
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" name="name" id="name" class="form-control" th:value="${group.name}">
+                        <input type="text" th:field="*{name}" class="form-control">
+
+                        <p th:if="${#fields.hasErrors('name')}" class="alert alert-danger" th:errors="*{name}"></p>
                     </div>
                     <button type="submit" class="btn btn-info">Speichern</button>
                 </form>

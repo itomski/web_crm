@@ -1,12 +1,11 @@
 package de.gfn.web.customermanagement;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -62,21 +61,15 @@ public class MainController {
     }
 
     @PostMapping("/save")
-    public String save(int id, String firstname, String lastname, LocalDate birthdate, int groupId,  Model ui) {
-        // TODO: Daten validieren
-        User user = new User(firstname, lastname, birthdate);
-        user.setId(id);
-        user.setGroup(groupRepo.findById(groupId).get());
+    public String save(@Valid @ModelAttribute("user") User user, BindingResult result, Model ui) {
+        if(result.hasErrors()) {
+            ui.addAttribute("groups", groupRepo.findAll());
+            return "form";
+        }
+        //user.setGroup(groupRepo.findById(groupId).get());
         repo.save(user);
         return "redirect:/list"; // Umleitung auf die Liste
     }
-
-//    @PostMapping("/save")
-//    public String save(User user,  Model ui) {
-//        // TODO: Daten validieren
-//        repo.save(user);
-//        return "redirect:/list"; // Umleitung auf die Liste
-//    }
 
     // http://localhost:8080/list
     @GetMapping("/list")

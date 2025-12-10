@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="de">
-<head th:replace="~{fragments.html :: header}"></head>
+<head th:replace="~{fragments.html :: header(${title})}"></head>
 <body>
     <div class="container">
-        <div th:replace="~{fragments.html :: mainNav}"></div>
+        <div th:replace="~{fragments.html :: mainNav('group')}"></div>
 
         <div class="row">
             <div class="col">

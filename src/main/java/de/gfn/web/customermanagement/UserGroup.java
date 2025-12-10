@@ -1,8 +1,11 @@
 package de.gfn.web.customermanagement;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -13,6 +16,7 @@ public class UserGroup {
     @GeneratedValue
     private int id;
 
+    @Size(min = 2, max = 20)
     private String name;
 
     @OneToMany(mappedBy = "group") // Eine Gruppe kann viele User enthalten
@@ -56,5 +60,17 @@ public class UserGroup {
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        UserGroup userGroup = (UserGroup) o;
+        return id == userGroup.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

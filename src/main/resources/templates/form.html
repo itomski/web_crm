@@ -1,34 +1,41 @@
 <!DOCTYPE html>
 <html lang="de">
-<head th:replace="~{fragments.html :: header}"></head>
+<head th:replace="~{fragments.html :: header(${title})}"></head>
 <body>
     <div class="container">
-        <div th:replace="~{fragments.html :: mainNav}"></div>
+        <div th:replace="~{fragments.html :: mainNav('user')}"></div>
 
         <div class="row">
             <div class="col">
                 <h1 th:text="${title}"></h1>
 
-                <form action="/save" method="post">
+                <form action="/save" method="post" th:object="${user}">
 
-                    <input type="hidden" name="id" th:value="${user.id}">
+                    <input type="hidden" th:field="*{id}">
+
+                    <ul th:if="${#fields.hasAnyErrors()}" class="alert alert-danger">
+                        <li th:each="error : ${#fields.allErrors()}" th:text="${error}"></li>
+                    </ul>
 
                     <div class="mb-3">
                         <label for="firstname" class="form-label">Vorname</label>
-                        <input type="text" name="firstname" id="firstname" class="form-control" th:value="${user.firstname}">
+                        <input type="text" th:field="*{firstname}" class="form-control">
+                        <p th:if="${#fields.hasErrors('firstname')}" class="alert alert-danger" th:errors="*{firstname}"></p>
                     </div>
                     <div class="mb-3">
                         <label for="lastname" class="form-label">Nachname</label>
-                        <input type="text" name="lastname" id="lastname" class="form-control" th:value="${user.lastname}">
+                        <input type="text" th:field="*{lastname}" class="form-control">
+                        <p th:if="${#fields.hasErrors('lastname')}" class="alert alert-danger" th:errors="*{lastname}"></p>
                     </div>
                     <div class="mb-3">
-                        <label for="birthdate" class="form-label">Geburtsdatum</label>
-                        <input type="date" name="birthdate" id="birthdate" class="form-control" th:value="${user.birthDate}">
+                        <label for="birthDate" class="form-label">Geburtsdatum</label>
+                        <input type="date" th:field="*{birthDate}" class="form-control">
+                        <p th:if="${#fields.hasErrors('birthDate')}" class="alert alert-danger" th:errors="*{birthDate}"></p>
                     </div>
                     <div class="mb-3">
-                        <label for="groupId" class="form-label">Gruppe</label>
-                        <select name="groupId" id="groupId" class="form-select">
-                            <option th:each="g : ${groups}" th:value="${g.id}" th:text="${g.name}"></option>
+                        <label for="group" class="form-label">Gruppe</label>
+                        <select th:filed="*{group}" class="form-select">
+                            <option th:each="g : ${groups}" th:value="${g.id}" th:text="${g.name}" th:selected="${g eq user.group}"></option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-info">Speichern</button>
